@@ -6,14 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Anasayfa</title>
     <script src="./node_modules/angular/angular.min.js"></script>
+    <script src="./node_modules/angular-ui-bootstrap/ui-bootstrap.js"></script>
     <script src="./assets/js/script.js"></script>
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./node_modules/angular-ui-bootstrap/ui-bootstrap-csp.css">
 </head>
-<body>
+<body ng-app>
     
-    <div ng-app>
+    <div >
         {{20*11}}
     </div>
+
+    <button class="btn btn-default" ng-click="uncheckable = !uncheckable">
+        Toggle uncheckable
+    </button>
 
 </body>
 </html>
