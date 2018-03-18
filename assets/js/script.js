@@ -1,17 +1,4 @@
-var app = angular.module("App", ["ngRoute"]).config(function($routeProvider) {
-    $routeProvider
-    .when("/", {
-        templateUrl : "login.html",
-        controller : "loginController"
-    }).when("/login", {
-        templateUrl : "login.html",
-        controller : "loginController"
-    })
-    .when("/register", {
-        templateUrl : "register.html",
-        controller : "registerController"
-    });
-});
+var app = angular.module("App", ["ngRoute"]);
 
 app.controller("registerController", function loginController($scope, $http){
     
@@ -61,7 +48,13 @@ app.controller("loginController", function loginController($scope, $http){
         
            $http(request).then(function(response){
                 if(response.status == 200){
-                    console.log(response.data);
+                    if(response.data == 0){
+                        console.log("böyle bir email yok");
+                    }else if(response.data == -1){
+                        console.log("email onaylanmamış.");
+                    }else{
+                        console.log(response.data);
+                    }
                 }
            }, function(error){
                 
