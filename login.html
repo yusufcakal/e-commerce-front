@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"ng-app="App">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+</head>
+<body ng-app ng-controller="loginController">
+
+    <form>
+        <input type="text" ng-model="user.email">
+        <input type="password" ng-model="user.password">
+        <button ng-click="userLogin()"> Login </button>
+        <a href="/register"> Register </a>
+    </form>
+
+    <script src="./node_modules/angular/angular.js"></script>
+    <script src="./assets/js/script.js"></script>
+    <script src="./node_modules/angular-route/angular-route.min.js"></script>
+
+</body>
+</html>

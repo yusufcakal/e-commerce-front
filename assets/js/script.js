@@ -8,8 +8,9 @@ app.config(function($routeProvider) {
         templateUrl : "dashboard.html"
     }).when("/register", {
         templateUrl : "register.html"
-    });
+    }).otherwise({ redirectTo: '/' });
 });
+
 
 app.controller("registerController", function loginController($scope, $http){
     
