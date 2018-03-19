@@ -12,11 +12,15 @@ app.config(function($routeProvider) {
 });
 
 
-app.controller("registerController", function loginController($scope, $http){
+app.controller("registerController", function loginController($scope, $http, $window){
     
     $scope.user;
     $scope.url = "http://localhost:3029/user/register";
     $scope.method = "POST"; 
+    
+    $scope.directLogin = function(){
+        $window.location.href = '/';
+    }
 
     $scope.userRegister = function(){
 
@@ -47,6 +51,10 @@ app.controller("loginController", function loginController($scope, $http, $windo
     $scope.user;
     $scope.url = "http://localhost:3029/user/login";
     $scope.method = "POST"; 
+
+    $scope.directRegister = function(){
+        $window.location.href = '/register';
+    }
 
     $scope.userLogin = function(){
 

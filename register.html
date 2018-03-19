@@ -6,16 +6,49 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Register</title>
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./node_modules/bulma//css/bulma.css">
 </head>
 <body ng-app ng-controller="registerController">
 
+    <section class="hero is-fullheight back">
+        <div class="hero-body">
+            <div class="container">
+            <div class="columns is-vcentered">
+                <div class="column is-4 is-offset-4">
+                <div class="box">
+                    <label class="label">İsim</label>
+                    <p class="control">
+                    <i class="fas fa-envelope"></i>
+                    <input ng-model="user.email" class="input" type="text" placeholder="info@yusufcakal.com">
+                    </p>
+                    <label class="label">Email</label>
+                    <p class="control">
+                    <i class="fas fa-envelope"></i>
+                    <input ng-model="user.email" class="input" type="text" placeholder="info@yusufcakal.com">
+                    </p>
+                    <label class="label">Parola</label>
+                    <p class="control">
+                    <input ng-model="user.password" class="input" type="password" placeholder="●●●●●●●">
+                    </p>
+                    <hr>
+                    <p class="control">
+                    <button class="button is-primary" ng-click="directLogin()">Giriş Yap</button>
+                    <button ng-click="userRegister()" class="button is-info">Kayıt Ol</button>
+                    </p>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+<!--
     <form>
         <input type="text" ng-model="user.name">
         <input type="text" ng-model="user.email">
         <input type="password" ng-model="user.password">
         <button ng-click="userRegister()"> Register </button>
     </form>
-
+-->
     <script src="./node_modules/angular/angular.js"></script>
     <script src="./assets/js/script.js"></script>
     <script src="./node_modules/angular-route/angular-route.min.js"></script>
