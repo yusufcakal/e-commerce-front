@@ -1,16 +1,30 @@
 var app = angular.module("App", ["ngRoute"]);
 
+app.config(function($routeProvider) {
+    $routeProvider
+    .when("/", {
+        templateUrl : "index.html"
+    })
+    .when("/login", {
+        templateUrl : "login.html"
+    })
+    .when("/register", {
+        templateUrl : "register.html"
+    });
+});
+
+
 app.controller("registerController", function loginController($scope, $http){
     
     $scope.user;
-    $scope.url = "http://localhost:8080/user/register";
+    $scope.url = "http://localhost:3029/user/register";
     $scope.method = "POST"; 
 
     $scope.userRegister = function(){
 
         var request = {
-            method: 'POST',
-            url: 'http://localhost:8080/user/register',
+            method: $scope.method,
+            url: $scope.url,
             headers: {
               'Content-Type': "application/json"
             },
@@ -32,14 +46,14 @@ app.controller("registerController", function loginController($scope, $http){
 app.controller("loginController", function loginController($scope, $http){
     
     $scope.user;
-    $scope.url = "http://localhost:8080/user/login";
+    $scope.url = "http://localhost:3029/user/login";
     $scope.method = "POST"; 
 
     $scope.userLogin = function(){
 
         var request = {
-            method: 'POST',
-            url: 'http://localhost:8080/user/login',
+            method: $scope.method,
+            url: $scope.url,
             headers: {
               'Content-Type': "application/json"
             },
