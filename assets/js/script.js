@@ -4,15 +4,12 @@ app.config(function($routeProvider) {
     $routeProvider
     .when("/", {
         templateUrl : "index.html"
-    })
-    .when("/login", {
-        templateUrl : "login.html"
-    })
-    .when("/register", {
+    }).when("/dashboard", {
+        templateUrl : "dashboard.html"
+    }).when("/register", {
         templateUrl : "register.html"
     });
 });
-
 
 app.controller("registerController", function loginController($scope, $http){
     
@@ -43,8 +40,9 @@ app.controller("registerController", function loginController($scope, $http){
     }
 });
 
-app.controller("loginController", function loginController($scope, $http){
+app.controller("loginController", function loginController($scope, $http, $window){
     
+    $scope.token;
     $scope.user;
     $scope.url = "http://localhost:3029/user/login";
     $scope.method = "POST"; 
@@ -62,16 +60,34 @@ app.controller("loginController", function loginController($scope, $http){
         
            $http(request).then(function(response){
                 if(response.status == 200){
-                    if(response.data == 0){
-                        console.log("böyle bir email yok");
-                    }else if(response.data == -1){
-                        console.log("email onaylanmamış.");
-                    }else{
+                    if(response.data == 0){ // yanlış veri
                         console.log(response.data);
+                    }else if(response.data == -1){ // onaylanmamış hesap
+                        console.log(response.data);
+                    }else{ // giriş başarılı -> token
+                        $scope.token = console.log(response.data);
+                        $window.localStorage.setItem("token", response.data);
+                        $window.location.href = '/dashboard';
                     }
                 }
            }, function(error){
                 
            });
     }
+});
+
+app.controller("dashboardController", function dashboardController($scope, $http, $window){
+
+    $scope.token = $window.localStorage.getItem("token");
+    $scope.init = function () {
+        if($scope.token == "null"){
+            $window.location.href = '/';
+        }
+    }
+    
+    $scope.userLogout = function(){
+        $window.localStorage.setItem("token", null);
+        $window.location.href = '/';
+    }
+
 });
