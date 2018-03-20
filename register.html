@@ -16,15 +16,19 @@
             <div class="columns is-vcentered">
                 <div class="column is-4 is-offset-4">
                 <div class="box">
+                    <div class="notification is-danger" ng-show="ui.alert">
+                        <button class="delete"></button>
+                        <strong ng-bind="message"> </strong>
+                    </div>
                     <label class="label">İsim</label>
                     <p class="control">
                     <i class="fas fa-envelope"></i>
-                    <input ng-model="user.email" class="input" type="text" placeholder="info@yusufcakal.com">
+                    <input ng-model="user.name" class="input" type="text" placeholder="Yusuf">
                     </p>
                     <label class="label">Email</label>
                     <p class="control">
                     <i class="fas fa-envelope"></i>
-                    <input ng-model="user.email" class="input" type="text" placeholder="info@yusufcakal.com">
+                    <input ng-model="user.email" class="input" type="email" placeholder="info@yusufcakal.com">
                     </p>
                     <label class="label">Parola</label>
                     <p class="control">
@@ -32,9 +36,8 @@
                     </p>
                     <hr>
                     <p class="control">
-                    <button class="button is-primary" ng-click="directLogin()">Giriş Yap</button>
                     <button ng-click="userRegister()" class="button is-info">Kayıt Ol</button>
-                    </p>
+                </p>
                 </div>
                 </div>
             </div>

@@ -14,6 +14,8 @@ app.config(function($routeProvider) {
 
 app.controller("registerController", function loginController($scope, $http, $window){
     
+    $scope.ui = { alert: false};
+    $scope.message = "";
     $scope.user;
     $scope.url = "http://localhost:3029/user/register";
     $scope.method = "POST"; 
@@ -32,16 +34,25 @@ app.controller("registerController", function loginController($scope, $http, $wi
             },
             data: $scope.user
            };
-        
-           $http(request).then(function(response){
+
+        if(!validateEmail($scope.user.email)){
+            $scope.message = "Lütfen doğru bir mail adresi giriniz.";
+            $scope.ui.alert = true; // email yanlış girilmiş.
+        }else{
+            $http(request).then(function(response){
                 if(response.status == 201){
-                    console.log("Kayıt Başarılı lütfen mail adresine gelen linke tıklayarak hesabınızı onaylayınız.");
+                    $scope.ui.alert = true;
+                    $scope.message = "Kayıt Başarılı. Mail adresinize gelen iletiyi onaylayınız.";
                 }
            }, function(error){
                 if(error.status == 409){
-                    console.log("Böyle Bir kullanıcı zaten var.");
+                    $scope.ui.alert = true;
+                    $scope.message = "Böyle bir kullanıcı zaten kayıtlı.";
                 }
            });
+        }
+        
+           
     }
 });
 

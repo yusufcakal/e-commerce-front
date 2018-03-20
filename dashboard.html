@@ -6,8 +6,33 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dashboard</title>
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./node_modules/bulma//css/bulma.css">
 </head>
 <body ng-app ng-controller="dashboardController">
+
+        <nav class="navbar" role="navigation" aria-label="dropdown navigation">
+            <div class="navbar-item has-dropdown">
+                <a class="navbar-link">
+                Docs
+                </a>
+            
+                <div class="navbar-dropdown">
+                <a class="navbar-item">
+                    Overview
+                </a>
+                <a class="navbar-item">
+                    Elements
+                </a>
+                <a class="navbar-item">
+                    Components
+                </a>
+                <hr class="navbar-divider">
+                <div class="navbar-item">
+                    Version 0.6.2
+                </div>
+                </div>
+            </div>
+        </nav>
 
     <div data-ng-init="init()"></div>
 
