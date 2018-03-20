@@ -65,13 +65,11 @@ app.controller("loginController", function loginController($scope, $http, $windo
     $scope.url = "http://localhost:3029/user/login";
     $scope.method = "POST"; 
 
-    $scope.controlToken = function(){
+    $scope.controlSession = function(){
         $scope.token = $window.localStorage.getItem("token");
-            if($scope.token != null){
-                $window.location.href = '/dashboard';
-                console.log("null değil");
+            if($scope.token != "null"){
+                $window.location.href = '/dashboard'
             }
-            console.log("sa");
     }
 
     $scope.directRegister = function(){
@@ -119,9 +117,10 @@ app.controller("dashboardController", function dashboardController($scope, $http
 
     $scope.token = $window.localStorage.getItem("token");
     $scope.init = function () {
-        if($scope.token == "null"){
+        if($scope.token.length < 7){
             $window.location.href = '/';
         }
+        console.log($scope.token.length);
     }
     
     $scope.userLogout = function(){
