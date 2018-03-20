@@ -9,18 +9,22 @@
     <link rel="stylesheet" href="./node_modules/bulma//css/bulma.css">
 </head>
 <body ng-app ng-controller="dashboardController" data-ng-init="init()">
-
-        <nav class="navbar">
-                <div class="container">
-                  <div id="navbarMenu" class="navbar-menu">
-                    <div class="navbar-end">
-                      <a class="navbar-item is-active">Kategoriler</a>
-                      <a class="navbar-item is-active">Ürünler</a>
-                      <a class="navbar-item is-active" ng-click="userLogout()">Çıkış Yap</a>
-                    </div>
-                  </div>
+    
+    <nav class="navbar">
+        <div class="container">
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    <a ng-click="routeCategory()" class="navbar-item is-active">Kategoriler</a>
+                    <a class="navbar-item is-active">Ürünler</a>
+                    <a class="navbar-item is-active" ng-click="userLogout()">Çıkış Yap</a>
                 </div>
-              </nav>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard">
+        
+    </div>
 
     <script src="./node_modules/angular/angular.js"></script>
     <script src="./assets/js/script.js"></script>

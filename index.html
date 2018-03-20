@@ -9,7 +9,7 @@
     <title>Login</title>
 </head>
 <body ng-app ng-controller="loginController" data-ng-init="controlSession()">
-    
+
         <section class="hero is-fullheight back">
             <div class="hero-body">
                 <div class="container">
@@ -25,14 +25,14 @@
                         <i class="fas fa-envelope"></i>
                         <input ng-model="user.email" class="input" type="email" placeholder="info@yusufcakal.com">
                         </p>
-                        <label class="label">Parola</label>
+                        <label class="label">Password</label>
                         <p class="control">
                         <input ng-model="user.password" class="input" type="password" placeholder="●●●●●●●">
                         </p>
                         <hr>
                         <p class="control">
-                        <button class="button is-primary" ng-click="userLogin()">Giriş Yap</button>
-                        <button ng-click="directRegister()" class="button is-info">Kayıt Ol</button>
+                        <button class="button is-primary" ng-click="userLogin()">Login</button>
+                        <button ng-click="directRegister()" class="button is-info">Sign Up</button>
                         </p>
                     </div>
                     </div>

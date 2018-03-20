@@ -6,6 +6,8 @@ app.config(function($routeProvider) {
         templateUrl : "index.html"
     }).when("/dashboard", {
         templateUrl : "dashboard.html"
+    }).when("/category", {
+        templateUrl : "category.html"
     }).when("/register", {
         templateUrl : "register.html"
     }).otherwise({ redirectTo: '/' });
@@ -101,7 +103,6 @@ app.controller("loginController", function loginController($scope, $http, $windo
                         $scope.message = "Lütfen email adresinizi doğrulayınız";
                         $scope.ui.alert = true; // email yanlış girilmiş.
                     }else{ // giriş başarılı -> token
-                        $scope.token = console.log(response.data);
                         $window.localStorage.setItem("token", response.data);
                         $window.location.href = '/dashboard';
                     }
@@ -120,7 +121,6 @@ app.controller("dashboardController", function dashboardController($scope, $http
         if($scope.token.length < 7){
             $window.location.href = '/';
         }
-        console.log($scope.token.length);
     }
     
     $scope.userLogout = function(){
@@ -130,7 +130,20 @@ app.controller("dashboardController", function dashboardController($scope, $http
 
 });
 
+app.controller("categoryController", function categoryController($scope, $http, $window){
+
+    $scope.name = "Merhaba Kategori Sayfasına Hoşgeldiniz.";
+
+    $scope.routeCategory = function(){
+        $window.location.href = '/category';
+    }
+
+});
+
+
+
 function validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
 }
+
