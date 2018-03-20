@@ -47,6 +47,8 @@ app.controller("registerController", function loginController($scope, $http, $wi
 
 app.controller("loginController", function loginController($scope, $http, $window){
     
+    $scope.ui = { alert: false };
+    $scope.message = ""
     $scope.token;
     $scope.user;
     $scope.url = "http://localhost:3029/user/login";
@@ -58,30 +60,38 @@ app.controller("loginController", function loginController($scope, $http, $windo
 
     $scope.userLogin = function(){
 
-        var request = {
-            method: $scope.method,
-            url: $scope.url,
-            headers: {
-              'Content-Type': "application/json"
-            },
-            data: $scope.user
-           };
-        
-           $http(request).then(function(response){
+        if(!validateEmail($scope.user.email)){
+            $scope.message = "Lütfen doğru bir mail adresi giriniz.";
+            $scope.ui.alert = true; // email yanlış girilmiş.
+        }else{
+            $scope.ui.alert = false; // email adresi doğru.
+            var request = {
+                method: $scope.method,
+                url: $scope.url,
+                headers: {
+                  'Content-Type': "application/json"
+                },
+                data: $scope.user
+               };
+            
+            $http(request).then(function(response){
                 if(response.status == 200){
                     if(response.data == 0){ // yanlış veri
-                        console.log(response.data);
+                        $scope.message = "Böyle bir kullanıcı yok.";
+                        $scope.ui.alert = true; // email yanlış girilmiş.
                     }else if(response.data == -1){ // onaylanmamış hesap
-                        console.log(response.data);
+                        $scope.message = "Lütfen email adresinizi doğrulayınız";
+                        $scope.ui.alert = true; // email yanlış girilmiş.
                     }else{ // giriş başarılı -> token
                         $scope.token = console.log(response.data);
                         $window.localStorage.setItem("token", response.data);
                         $window.location.href = '/dashboard';
                     }
                 }
-           }, function(error){
+            }, function(error){
                 
-           });
+            });
+        }
     }
 });
 
@@ -100,3 +110,8 @@ app.controller("dashboardController", function dashboardController($scope, $http
     }
 
 });
+
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}

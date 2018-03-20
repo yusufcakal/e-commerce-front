@@ -16,10 +16,14 @@
                 <div class="columns is-vcentered">
                     <div class="column is-4 is-offset-4">
                     <div class="box">
+                        <div class="notification is-danger" ng-show="ui.alert">
+                            <button class="delete"></button>
+                            <strong ng-bind="message"> </strong>
+                        </div>
                         <label class="label">Email</label>
                         <p class="control">
                         <i class="fas fa-envelope"></i>
-                        <input ng-model="user.email" class="input" type="text" placeholder="info@yusufcakal.com">
+                        <input ng-model="user.email" class="input" type="email" placeholder="info@yusufcakal.com">
                         </p>
                         <label class="label">Parola</label>
                         <p class="control">
