@@ -8,35 +8,32 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./node_modules/bulma//css/bulma.css">
 </head>
-<body ng-app ng-controller="dashboardController">
+<body ng-app ng-controller="dashboardController" data-ng-init="init()">
 
-        <nav class="navbar" role="navigation" aria-label="dropdown navigation">
-            <div class="navbar-item has-dropdown">
-                <a class="navbar-link">
-                Docs
-                </a>
-            
-                <div class="navbar-dropdown">
-                <a class="navbar-item">
-                    Overview
-                </a>
-                <a class="navbar-item">
-                    Elements
-                </a>
-                <a class="navbar-item">
-                    Components
-                </a>
-                <hr class="navbar-divider">
-                <div class="navbar-item">
-                    Version 0.6.2
+        <nav class="navbar" style="background-color:#e1e1e1;">
+                <div class="container">
+                  <div class="navbar-brand">
+                    <span class="navbar-burger burger" data-target="navbarMenu">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </span>
+                  </div>
+                  <div id="navbarMenu" class="navbar-menu">
+                    <div class="navbar-end">
+                      <a class="navbar-item is-active">
+                        Kategoriler
+                      </a>
+                      <a class="navbar-item is-active">
+                        Ürünler
+                      </a>
+                      <a class="navbar-item is-active" ng-click="userLogout()">
+                        Çıkış Yap
+                      </a>
+                    </div>
+                  </div>
                 </div>
-                </div>
-            </div>
-        </nav>
-
-    <div data-ng-init="init()"></div>
-
-    <button ng-click="userLogout()"> Çıkış Yap </button>
+              </nav>
 
     <script src="./node_modules/angular/angular.js"></script>
     <script src="./assets/js/script.js"></script>

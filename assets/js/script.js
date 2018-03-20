@@ -57,13 +57,22 @@ app.controller("registerController", function loginController($scope, $http, $wi
 });
 
 app.controller("loginController", function loginController($scope, $http, $window){
-    
+
     $scope.ui = { alert: false };
     $scope.message = ""
     $scope.token;
     $scope.user;
     $scope.url = "http://localhost:3029/user/login";
     $scope.method = "POST"; 
+
+    $scope.controlToken = function(){
+        $scope.token = $window.localStorage.getItem("token");
+            if($scope.token != null){
+                $window.location.href = '/dashboard';
+                console.log("null değil");
+            }
+            console.log("sa");
+    }
 
     $scope.directRegister = function(){
         $window.location.href = '/register';
