@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"ng-app="App" >
+<html lang="en" ng-app="scotchApp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,15 +7,20 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./node_modules/bulma//css/bulma.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+    <script src="./assets/js/script.js"></script>
+
 </head>
-<body ng-app ng-controller="dashboardController" data-ng-init="init()">
+<body ng-app ng-controller="mainController" data-ng-init="init()">
     
     <nav class="navbar">
         <div class="container">
             <div id="navbarMenu" class="navbar-menu">
                 <div class="navbar-end">
-                    <a ng-click="routeCategory()" class="navbar-item is-active">Kategoriler</a>
-                    <a class="navbar-item is-active">Ürünler</a>
+                    <a href="#category" class="navbar-item is-active">Kategoriler</a>
+                    <a href="#product" class="navbar-item is-active">Ürünler</a>
                     <a class="navbar-item is-active" ng-click="userLogout()">Çıkış Yap</a>
                 </div>
             </div>
@@ -23,12 +28,8 @@
     </nav>
 
     <div class="dashboard">
-        
+        <div ng-view></div>
     </div>
-
-    <script src="./node_modules/angular/angular.js"></script>
-    <script src="./assets/js/script.js"></script>
-    <script src="./node_modules/angular-route/angular-route.min.js"></script>
 
 </body>
 </html>

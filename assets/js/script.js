@@ -116,17 +116,7 @@ app.controller("loginController", function loginController($scope, $http, $windo
 
 app.controller("dashboardController", function dashboardController($scope, $http, $window){
 
-    $scope.token = $window.localStorage.getItem("token");
-    $scope.init = function () {
-        if($scope.token.length < 7){
-            $window.location.href = '/';
-        }
-    }
     
-    $scope.userLogout = function(){
-        $window.localStorage.setItem("token", null);
-        $window.location.href = '/';
-    }
 
 });
 
@@ -147,3 +137,47 @@ function validateEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
+	// create the module and name it scotchApp
+	var scotchApp = angular.module('scotchApp', ['ngRoute']);
+
+	// configure our routes
+	scotchApp.config(function($routeProvider) {
+		$routeProvider
+
+			// route for the about page
+			.when('/category', {
+				templateUrl : 'category.html',
+				controller  : 'categoryController'
+			})
+
+			// route for the contact page
+			.when('/product', {
+				templateUrl : 'product.html',
+				controller  : 'productController'
+			});
+	});
+
+	// create the controller and inject Angular's $scope
+	scotchApp.controller('mainController', function($scope, $window) {
+
+        $scope.token = $window.localStorage.getItem("token");
+        $scope.init = function () {
+            if($scope.token.length < 7){
+                $window.location.href = '/';
+            }
+        }
+        
+        $scope.userLogout = function(){
+            $window.localStorage.setItem("token", null);
+            $window.location.href = '/';
+        }
+        
+	});
+
+	scotchApp.controller('categoryController', function($scope) {
+		$scope.message = 'Category Page';
+	});
+
+	scotchApp.controller('productController', function($scope) {
+		$scope.message = 'Product Page';
+	});
