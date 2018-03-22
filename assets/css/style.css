@@ -19,5 +19,28 @@
 
 .dashboard{
     height:92vh;
-    background-color: #e1e1e1;
+    background-color: #fff;
+}
+
+.aside {
+  background-color: #F9F9F9;
+  border-right: 1px solid #DEDEDE;
+  height:92vh;
+}
+
+.aside > *{
+  text-align: center;
+  margin-top: 10px;
+}
+
+.aside button{
+    float: right;
+}
+
+.aside input{
+    text-align: center;
+}
+
+.aside a{
+  float: right;
 }

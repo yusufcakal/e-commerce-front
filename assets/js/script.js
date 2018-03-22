@@ -53,8 +53,7 @@ app.controller("registerController", function loginController($scope, $http, $wi
                 }
            });
         }
-        
-           
+
     }
 });
 
@@ -114,24 +113,6 @@ app.controller("loginController", function loginController($scope, $http, $windo
     }
 });
 
-app.controller("dashboardController", function dashboardController($scope, $http, $window){
-
-    
-
-});
-
-app.controller("categoryController", function categoryController($scope, $http, $window){
-
-    $scope.name = "Merhaba Kategori Sayfasına Hoşgeldiniz.";
-
-    $scope.routeCategory = function(){
-        $window.location.href = '/category';
-    }
-
-});
-
-
-
 function validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
@@ -157,7 +138,6 @@ function validateEmail(email) {
 			});
 	});
 
-	// create the controller and inject Angular's $scope
 	scotchApp.controller('mainController', function($scope, $window) {
 
         $scope.token = $window.localStorage.getItem("token");
@@ -174,8 +154,67 @@ function validateEmail(email) {
         
 	});
 
-	scotchApp.controller('categoryController', function($scope) {
-		$scope.message = 'Category Page';
+	scotchApp.controller('categoryController', function($scope, $http) {
+        
+        $scope.method = "GET";
+        $scope.url = "http://localhost:3029/categories";
+        $scope.categories;
+        $scope.saveUrl = "http://localhost:3029/categories/add";
+        $scope.saveMethod = "POST";
+        $scope.deleteUrl = "http://localhost:3029/categories/delete/";
+        $scope.deleteMethod = "DELETE";
+
+        $('table').on('click', 'button[id="delete"]', function(e){
+            var id = $(this).closest('tr').children('th:first').text();
+
+            var request = {
+                method: $scope.deleteMethod,
+                url: $scope.deleteUrl + id,
+                headers: {
+                  'Content-Type': "application/json"
+                },
+               };
+    
+            $http(request).then(function(response){
+                if(response.status == 200){
+                    $scope.categories = response.data;
+                }
+            });
+
+        });
+    
+        $scope.saveCategory = function(){
+
+           var data = {name : $scope.categoryName};
+
+           if(($scope.categoryName) == null){
+               alert("boş olamaz");
+           }else{
+            $http.post($scope.saveUrl, data, {headers: {'Content-Type': 'application/json'} })
+            .then(function (response) {
+                $scope.init();
+            });
+           }
+
+        }
+
+        $scope.init = function(){
+            var request = {
+                method: $scope.method,
+                url: $scope.url,
+                headers: {
+                  'Content-Type': "application/json"
+                },
+               };
+    
+            $http(request).then(function(response){
+                if(response.status == 200){
+                    $scope.categories = response.data;
+                }
+            });
+        }
+        
+
 	});
 
 	scotchApp.controller('productController', function($scope) {
