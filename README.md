@@ -11,12 +11,16 @@ It's open source project providers fundamental product, category and session man
 ## Table of Contents
 
 - [User](https://github.com/yusufcakal/e-commerce-front#user)
+  + [session](https://github.com/yusufcakal/e-commerce#session)
 - [Category](https://github.com/yusufcakal/e-commerce-front#category)
 - [Product](https://github.com/yusufcakal/e-commerce-front#product)
 - [Depends](https://github.com/yusufcakal/e-commerce-front#depends)
 
 
 ### User
+#### Session
+Session management was also provided with the token value held in the local storage.
+
  - ##### Login
 ![login](https://user-images.githubusercontent.com/16848490/37685050-149cc25a-2ca3-11e8-99a9-1b07993ac4e1.PNG)
  - ##### Register
