@@ -131,6 +131,12 @@ function validateEmail(email) {
 				controller  : 'categoryController'
 			})
 
+            // route for the contact page
+			.when('/main', {
+				templateUrl : 'main.html',
+				controller  : 'mainPageController'
+			})
+
 			// route for the contact page
 			.when('/product', {
 				templateUrl : 'product.html',
@@ -219,4 +225,8 @@ function validateEmail(email) {
 
 	scotchApp.controller('productController', function($scope) {
 		$scope.message = 'Product Page';
+    });
+    
+    scotchApp.controller('mainPageController', function($scope) {
+		$scope.message = 'Main Page';
 	});

@@ -3,6 +3,10 @@
 }
 .navbar{
     background-color:#3273DC!important;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
 }
 
 .navbar-end a{
@@ -18,14 +22,14 @@
 }
 
 .dashboard{
-    height:92vh;
+    height:93vh;
     background-color: #fff;
 }
 
 .aside {
   background-color: #F9F9F9;
   border-right: 1px solid #DEDEDE;
-  height:92vh;
+  height:93vh;
 }
 
 .aside > *{
@@ -43,4 +47,17 @@
 
 .aside a{
   float: right;
+}
+
+#price{
+    width: 100px;
+    float: left;
+}
+
+.card{
+    float: left;
+    margin-left: 25px;
+    margin-top: 20px;
+    width: 300px;
+    height: auto;
 }
