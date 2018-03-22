@@ -118,115 +118,115 @@ function validateEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
-	// create the module and name it scotchApp
-	var scotchApp = angular.module('scotchApp', ['ngRoute']);
+// create the module and name it scotchApp
+var scotchApp = angular.module('scotchApp', ['ngRoute']);
 
-	// configure our routes
-	scotchApp.config(function($routeProvider) {
-		$routeProvider
+// configure our routes
+scotchApp.config(function($routeProvider) {
+    $routeProvider
 
-			// route for the about page
-			.when('/category', {
-				templateUrl : 'category.html',
-				controller  : 'categoryController'
-			})
+        // route for the about page
+        .when('/category', {
+            templateUrl : 'category.html',
+            controller  : 'categoryController'
+        })
 
-            // route for the contact page
-			.when('/main', {
-				templateUrl : 'main.html',
-				controller  : 'mainPageController'
-			})
+        // route for the contact page
+        .when('/main', {
+            templateUrl : 'main.html',
+            controller  : 'mainPageController'
+        })
 
-			// route for the contact page
-			.when('/product', {
-				templateUrl : 'product.html',
-				controller  : 'productController'
-			});
-	});
+        // route for the contact page
+        .when('/product', {
+            templateUrl : 'product.html',
+            controller  : 'productController'
+        });
+});
 
-	scotchApp.controller('mainController', function($scope, $window) {
+scotchApp.controller('mainController', function($scope, $window) {
 
-        $scope.token = $window.localStorage.getItem("token");
-        $scope.init = function () {
-            if($scope.token.length < 7){
-                $window.location.href = '/';
-            }
-        }
-        
-        $scope.userLogout = function(){
-            $window.localStorage.setItem("token", null);
+    $scope.token = $window.localStorage.getItem("token");
+    $scope.init = function () {
+        if($scope.token.length < 7){
             $window.location.href = '/';
         }
-        
-	});
-
-	scotchApp.controller('categoryController', function($scope, $http) {
-        
-        $scope.method = "GET";
-        $scope.url = "http://localhost:3029/categories";
-        $scope.categories;
-        $scope.saveUrl = "http://localhost:3029/categories/add";
-        $scope.saveMethod = "POST";
-        $scope.deleteUrl = "http://localhost:3029/categories/delete/";
-        $scope.deleteMethod = "DELETE";
-
-        $('table').on('click', 'button[id="delete"]', function(e){
-            var id = $(this).closest('tr').children('th:first').text();
-
-            var request = {
-                method: $scope.deleteMethod,
-                url: $scope.deleteUrl + id,
-                headers: {
-                  'Content-Type': "application/json"
-                },
-               };
+    }
     
-            $http(request).then(function(response){
-                if(response.status == 200){
-                    $scope.categories = response.data;
-                }
-            });
+    $scope.userLogout = function(){
+        $window.localStorage.setItem("token", null);
+        $window.location.href = '/';
+    }
+    
+});
 
+scotchApp.controller('categoryController', function($scope, $http) {
+    
+    $scope.method = "GET";
+    $scope.url = "http://localhost:3029/categories";
+    $scope.categories;
+    $scope.saveUrl = "http://localhost:3029/categories/add";
+    $scope.saveMethod = "POST";
+    $scope.deleteUrl = "http://localhost:3029/categories/delete/";
+    $scope.deleteMethod = "DELETE";
+
+    $('table').on('click', 'button[id="delete"]', function(e){
+        var id = $(this).closest('tr').children('th:first').text();
+
+        var request = {
+            method: $scope.deleteMethod,
+            url: $scope.deleteUrl + id,
+            headers: {
+                'Content-Type': "application/json"
+            },
+            };
+
+        $http(request).then(function(response){
+            if(response.status == 200){
+                $scope.categories = response.data;
+            }
         });
-    
-        $scope.saveCategory = function(){
 
-           var data = {name : $scope.categoryName};
-
-           if(($scope.categoryName) == null){
-               alert("boş olamaz");
-           }else{
-            $http.post($scope.saveUrl, data, {headers: {'Content-Type': 'application/json'} })
-            .then(function (response) {
-                $scope.init();
-            });
-           }
-
-        }
-
-        $scope.init = function(){
-            var request = {
-                method: $scope.method,
-                url: $scope.url,
-                headers: {
-                  'Content-Type': "application/json"
-                },
-               };
-    
-            $http(request).then(function(response){
-                if(response.status == 200){
-                    $scope.categories = response.data;
-                }
-            });
-        }
-        
-
-	});
-
-	scotchApp.controller('productController', function($scope) {
-		$scope.message = 'Product Page';
     });
+
+    $scope.saveCategory = function(){
+
+        var data = {name : $scope.categoryName};
+
+        if(($scope.categoryName) == null){
+            alert("boş olamaz");
+        }else{
+        $http.post($scope.saveUrl, data, {headers: {'Content-Type': 'application/json'} })
+        .then(function (response) {
+            $scope.init();
+        });
+        }
+
+    }
+
+    $scope.init = function(){
+        var request = {
+            method: $scope.method,
+            url: $scope.url,
+            headers: {
+                'Content-Type': "application/json"
+            },
+            };
+
+        $http(request).then(function(response){
+            if(response.status == 200){
+                $scope.categories = response.data;
+            }
+        });
+    }
     
-    scotchApp.controller('mainPageController', function($scope) {
-		$scope.message = 'Main Page';
-	});
+
+});
+
+scotchApp.controller('productController', function($scope) {
+    $scope.message = 'Product Page';
+});
+
+scotchApp.controller('mainPageController', function($scope) {
+    $scope.message = 'Main Page';
+});

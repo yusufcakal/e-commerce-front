@@ -3,10 +3,10 @@
 }
 .navbar{
     background-color:#3273DC!important;
-    position: fixed;
+    position: fixed!important;
+    top: 0!important;
+    width: 100%!important;
     z-index: 1;
-    top: 0;
-    left: 0;
 }
 
 .navbar-end a{
@@ -24,12 +24,22 @@
 .dashboard{
     height:93vh;
     background-color: #fff;
+    margin-top: 15px;
 }
 
 .aside {
+  margin-top: 8vh;
   background-color: #F9F9F9;
   border-right: 1px solid #DEDEDE;
   height:93vh;
+  position: fixed!important;
+  top: 0!important;
+  z-index: 1;
+}
+
+.right-side, .table{
+    margin-top: 8vh;
+    margin-left: 340px;
 }
 
 .aside > *{
