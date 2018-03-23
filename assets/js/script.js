@@ -179,7 +179,7 @@ scotchApp.controller('categoryController', function($scope, $http) {
             headers: {
                 'Content-Type': "application/json"
             },
-            };
+        };
 
         $http(request).then(function(response){
             if(response.status == 200){
@@ -223,8 +223,56 @@ scotchApp.controller('categoryController', function($scope, $http) {
 
 });
 
-scotchApp.controller('productController', function($scope) {
-    $scope.message = 'Product Page';
+scotchApp.controller('productController', function($scope, $http) {
+    
+    $scope.method = "GET";
+    $scope.categpryUrl = "http://localhost:3029/categories";
+    $scope.productUrl = "http://localhost:3029/products/add";
+    $scope.productMethod = "POST";
+
+    $scope.getCategories = function(){   
+
+        var request = {
+            method: $scope.method,
+            url: $scope.categpryUrl,
+            headers: {
+                'Content-Type': "application/json"
+            }
+        };
+
+        $http(request).then(function(response){
+            if(response.status == 200){
+                $scope.categories = response.data;
+            }
+        });
+
+    }
+
+    $scope.saveProduct = function(){
+
+        var product = {
+            name: "Yeni Ürün Test12342342asdasdadasdasd34",
+            price: 60.00,
+            stock: 30,
+            category_id: 17
+        }
+        
+        $http({
+            url: $scope.productUrl,
+            method: $scope.productMethod,
+            headers: { 'Content-Type': undefined },
+            transformRequest: function (data) {
+                var formData = new FormData();
+                formData.append("product", product);
+                formData.append("file", $scope.files);
+                return formData;
+            }
+        }).then(function (response) {
+            alert(response.data);
+        });
+        
+    }
+
 });
 
 scotchApp.controller('mainPageController', function($scope) {
