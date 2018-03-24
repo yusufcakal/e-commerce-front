@@ -208,7 +208,6 @@ app.controller('categoryController', function($scope, $http) {
 
 app.controller('productController', function($scope, $http) {
 
-    $scope.products;
     $scope.method = "GET";
     $scope.categpryUrl = "http://localhost:3029/categories";
     $scope.productAddUrl = "http://localhost:3029/products/add";
@@ -253,10 +252,11 @@ app.controller('productController', function($scope, $http) {
         $http(request).then(function(response){
             if(response.status == 200){
                 $scope.products = response.data;
-                console.log(response.data);
+                console.log($scope.products);
             }
         });
     }
+
 
     $scope.saveProduct = function(){
 
@@ -264,7 +264,7 @@ app.controller('productController', function($scope, $http) {
             name: $scope.productName,
             price: $scope.productPrice,
             stock: $scope.productStock,
-            category_id: ($scope.category.id)
+            category: ($scope.category)
         }
 
        $http({
