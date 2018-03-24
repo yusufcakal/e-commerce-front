@@ -10,6 +10,15 @@ app.config(function($routeProvider) {
         templateUrl : "category.html"
     }).when("/register", {
         templateUrl : "register.html"
+    }).when('/category', {
+        templateUrl : 'category.html',
+        controller  : 'categoryController'
+    }).when('/main', {
+        templateUrl : 'main.html',
+        controller  : 'mainPageController'
+    }).when('/product', {
+        templateUrl : 'product.html',
+        controller  : 'productController'
     }).otherwise({ redirectTo: '/' });
 });
 
@@ -118,33 +127,7 @@ function validateEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
-// create the module and name it scotchApp
-var scotchApp = angular.module('scotchApp', ['ngRoute']);
-
-// configure our routes
-scotchApp.config(function($routeProvider) {
-    $routeProvider
-
-        // route for the about page
-        .when('/category', {
-            templateUrl : 'category.html',
-            controller  : 'categoryController'
-        })
-
-        // route for the contact page
-        .when('/main', {
-            templateUrl : 'main.html',
-            controller  : 'mainPageController'
-        })
-
-        // route for the contact page
-        .when('/product', {
-            templateUrl : 'product.html',
-            controller  : 'productController'
-        });
-});
-
-scotchApp.controller('mainController', function($scope, $window) {
+app.controller('mainController', function($scope, $window) {
 
     $scope.token = $window.localStorage.getItem("token");
     $scope.init = function () {
@@ -160,7 +143,7 @@ scotchApp.controller('mainController', function($scope, $window) {
     
 });
 
-scotchApp.controller('categoryController', function($scope, $http) {
+app.controller('categoryController', function($scope, $http) {
     
     $scope.method = "GET";
     $scope.url = "http://localhost:3029/categories";
@@ -223,14 +206,24 @@ scotchApp.controller('categoryController', function($scope, $http) {
 
 });
 
-scotchApp.controller('productController', function($scope, $http) {
-    
+app.controller('productController', function($scope, $http) {
+
+    $scope.products;
     $scope.method = "GET";
     $scope.categpryUrl = "http://localhost:3029/categories";
-    $scope.productUrl = "http://localhost:3029/products/add";
-    $scope.productMethod = "POST";
+    $scope.productAddUrl = "http://localhost:3029/products/add";
+    $scope.productAddMethod = "POST";
+    $scope.productGetUrl = "http://localhost:3029/products/";
 
-    $scope.getCategories = function(){   
+    $scope.files = [];
+
+    $scope.LoadFileData = function (files) {
+        for (var i = 0; i < files.length; i++) {
+            $scope.files.push(files[i]);
+        }
+    };
+
+    $scope.getCategories = function(){
 
         var request = {
             method: $scope.method,
@@ -248,33 +241,54 @@ scotchApp.controller('productController', function($scope, $http) {
 
     }
 
+    $scope.getAllProducts = function(){
+        var request = {
+            method: $scope.method,
+            url: $scope.productGetUrl,
+            headers: {
+                'Content-Type': "application/json"
+            }
+        };
+
+        $http(request).then(function(response){
+            if(response.status == 200){
+                $scope.products = response.data;
+                console.log(response.data);
+            }
+        });
+    }
+
     $scope.saveProduct = function(){
 
         var product = {
-            name: "Yeni Ürün Test12342342asdasdadasdasd34",
-            price: 60.00,
-            stock: 30,
-            category_id: 17
+            name: $scope.productName,
+            price: $scope.productPrice,
+            stock: $scope.productStock,
+            category_id: ($scope.category.id)
         }
-        
-        $http({
-            url: $scope.productUrl,
-            method: $scope.productMethod,
-            headers: { 'Content-Type': undefined },
-            transformRequest: function (data) {
-                var formData = new FormData();
-                formData.append("product", product);
-                formData.append("file", $scope.files);
-                return formData;
+
+       $http({
+        url: $scope.productAddUrl,
+        method: $scope.productAddMethod,
+        headers: { 'Content-Type': undefined },
+        transformRequest: function(data) {
+            var formData = new FormData();
+            formData.append("product", JSON.stringify(product));
+            for (var i=0; i<($scope.files.length); i++) {
+                formData.append("file", $scope.files[i]);
             }
-        }).then(function (response) {
-            alert(response.data);
+            return formData;
+
+        },
+        data: { product: $scope.product, file: $scope.files }
+        })
+        .success(function(response) {
+            $scope.getAllProducts();
         });
-        
     }
 
 });
 
-scotchApp.controller('mainPageController', function($scope) {
+app.controller('mainPageController', function($scope) {
     $scope.message = 'Main Page';
 });

@@ -10,16 +10,14 @@
 					<div class="select is-info">
 						<select name="text" ng-model="category" ng-options="c.name for c in categories"></select>
 					</div>
-					<h4>{{category}}</h4>
 				</div>
 			</div>
-			<input type="file" ng-model="files" uploader="uploader" multiple  /><br/>
-			<p>{{file.name}}</p>
+			<input type="file" onchange="angular.element(this).scope().LoadFileData(this.files)" multiple  /><br/>
 			<button class="button is-info" ng-click="saveProduct()">Save</button>
 		</div>
 		<div class="column is-9 right-side">
-			<div class="container">
-				<a target="_blank" href="https://www.google.com.tr/">
+			<div class="container"  data-ng-init="getAllProducts()">
+				<a target="_blank" href="https://www.google.com.tr/" ng-repeat="product in products">
 					<div class="card">
 						<div class="card-image">
 							<figure class="image is-4by3">
@@ -27,51 +25,9 @@
 							</figure>
 						</div>
 						<div class="card-content">
-							<h3>Name</h3>
-							<h3>Price</h3>
-							<h3>Stock</h3>
-						</div>
-					</div>
-				</a>
-				<a target="_blank" href="https://www.google.com.tr/">
-					<div class="card">
-						<div class="card-image">
-							<figure class="image is-4by3">
-							<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-							</figure>
-						</div>
-						<div class="card-content">
-							<h3>Name</h3>
-							<h3>Price</h3>
-							<h3>Stock</h3>
-						</div>
-					</div>
-				</a>
-				<a target="_blank" href="https://www.google.com.tr/">
-					<div class="card">
-						<div class="card-image">
-							<figure class="image is-4by3">
-							<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-							</figure>
-						</div>
-						<div class="card-content">
-							<h3>Name</h3>
-							<h3>Price</h3>
-							<h3>Stock</h3>
-						</div>
-					</div>
-				</a>
-				<a target="_blank" href="https://www.google.com.tr/">
-					<div class="card">
-						<div class="card-image">
-							<figure class="image is-4by3">
-							<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-							</figure>
-						</div>
-						<div class="card-content">
-							<h3>Name</h3>
-							<h3>Price</h3>
-							<h3>Stock</h3>
+							<h3><b>Name :</b> {{product.name}}</h3>
+							<h3><b>Price :</b> {{product.price}}$</h3>
+							<h3><b>Stock :</b> {{product.stock}}</h3>
 						</div>
 					</div>
 				</a>
