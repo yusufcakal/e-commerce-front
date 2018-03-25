@@ -13,25 +13,26 @@
 				</div>
 			</div>
 			<input type="file" onchange="angular.element(this).scope().LoadFileData(this.files)" multiple  /><br/>
-			<button class="button is-info" ng-click="saveProduct()">Save</button>
+			<button class="button is-success" ng-click="saveProduct()">Save</button>
 		</div>
 		<div class="column is-9 right-side">
-			<div class="container"  data-ng-init="getAllProducts()">
-				<a target="_blank" href="https://www.google.com.tr/" ng-repeat="product in products">
-					<div class="card">
-						<div class="card-image">
-							<figure class="image is-4by3">
-							<img ng-src="{{product.imageList[0].path}}">
-							</figure>
-						</div>
+			<div class="container" data-ng-init="getAllProducts()">
+					<div class="card" ng-repeat="product in products">
+						<a target="_blank" href="https://www.google.com.tr/" >
+							<div class="card-image">
+								<figure class="image is-4by3">
+								<img ng-src="{{product.imageList[0].path}}">
+								</figure>
+							</div>
+						</a>
 						<div class="card-content">
-							<h3><b>Name :</b> {{product.name}}</h3>
-							<h3><b>Price :</b> {{product.price}}$</h3>
-							<h3><b>Stock :</b> {{product.stock}}</h3>
-							<h3><b>Category :</b> {{product.category.name}}</h3>
+							<h3>Name : <b>{{product.name}}</b> </h3>
+							<h3>Price : <b>{{product.price}}$</b> </h3>
+							<h3>Stock : <b>{{product.stock}}</b> </h3>
+							<h3>Category : <b>{{product.category.name}}</b> </h3>
+							<a class="button is-danger" ng-click="deleteProduct(product.id)"> Delete </a>
 						</div>
 					</div>
-				</a>
 			</div>
 		</div>
 	</div>

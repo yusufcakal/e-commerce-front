@@ -213,6 +213,8 @@ app.controller('productController', function($scope, $http) {
     $scope.productAddUrl = "http://localhost:3029/products/add";
     $scope.productAddMethod = "POST";
     $scope.productGetUrl = "http://localhost:3029/products/";
+    
+    $scope.productDeleteMethod = "DELETE";
 
     $scope.files = [];
 
@@ -221,6 +223,24 @@ app.controller('productController', function($scope, $http) {
             $scope.files.push(files[i]);
         }
     };
+
+    $scope.deleteProduct = function(productId){
+
+        var request = {
+            method: $scope.productDeleteMethod,
+            url: ($scope.productGetUrl+productId),
+            headers: {
+                'Content-Type': "application/json"
+            }
+        };
+
+        $http(request).then(function(response){
+            if(response.status == 200){
+                $scope.products = response.data;
+            }
+        });
+
+    }
 
     $scope.getCategories = function(){
 
@@ -289,6 +309,69 @@ app.controller('productController', function($scope, $http) {
 
 });
 
-app.controller('mainPageController', function($scope) {
-    $scope.message = 'Main Page';
+app.controller('mainPageController', function($scope, $http) {
+
+    $scope.method = "GET";
+    $scope.productAddMethod = "POST";
+    $scope.productGetUrl = "http://localhost:3029/products/";
+    $scope.categpryUrl = "http://localhost:3029/categories/";
+    $scope.productDeleteMethod = "DELETE";
+
+    $scope.update = function(id){
+        alert(id);
+    }
+
+    $scope.deleteProduct = function(productId){
+
+        var request = {
+            method: $scope.productDeleteMethod,
+            url: ($scope.productGetUrl+productId),
+            headers: {
+                'Content-Type': "application/json"
+            }
+        };
+
+        $http(request).then(function(response){
+            if(response.status == 200){
+                $scope.products = response.data;
+            }
+        });
+
+    }
+
+    $scope.getCategories = function(){
+
+        var request = {
+            method: $scope.method,
+            url: $scope.categpryUrl,
+            headers: {
+                'Content-Type': "application/json"
+            }
+        };
+
+        $http(request).then(function(response){
+            if(response.status == 200){
+                $scope.categories = response.data;
+            }
+        });
+
+    }
+
+    $scope.getAllProducts = function(){
+        var request = {
+            method: $scope.method,
+            url: $scope.productGetUrl,
+            headers: {
+                'Content-Type': "application/json"
+            }
+        };
+
+        $http(request).then(function(response){
+            if(response.status == 200){
+                $scope.products = response.data;
+                console.log($scope.products);
+            }
+        });
+    }
+
 });

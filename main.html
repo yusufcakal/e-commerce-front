@@ -1,3 +1,34 @@
-<div class="main">
-        {{message}}
+<div data-ng-init="getCategories()">
+    <div class="columns">
+        <div class="column is-3 aside">
+            <h5 class="title is-5">Properties</h5>
+            <div class="field">
+                <div class="control">
+                    <div class="select is-info">
+                        <select name="text" ng-change="update(category.id)" ng-model="category" ng-options="c.name for c in categories"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column is-9 right-side">
+            <div class="container" data-ng-init="getAllProducts()">
+                    <div class="card" ng-repeat="product in products">
+                        <a target="_blank" href="https://www.google.com.tr/" >
+                            <div class="card-image">
+                                <figure class="image is-4by3">
+                                <img ng-src="{{product.imageList[0].path}}">
+                                </figure>
+                            </div>
+                        </a>
+                        <div class="card-content">
+                            <h3>Name : <b>{{product.name}}</b> </h3>
+                            <h3>Price : <b>{{product.price}}$</b> </h3>
+                            <h3>Stock : <b>{{product.stock}}</b> </h3>
+                            <h3>Category : <b>{{product.category.name}}</b> </h3>
+                            <a class="button is-danger" ng-click="deleteProduct(product.id)"> Delete </a>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
 </div>

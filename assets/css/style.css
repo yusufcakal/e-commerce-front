@@ -71,3 +71,7 @@
     width: 300px;
     height: auto;
 }
+
+.is-danger{
+    margin-top: 8px;
+}
