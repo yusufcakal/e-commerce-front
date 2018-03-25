@@ -318,15 +318,21 @@ app.controller('mainPageController', function($scope, $http) {
     $scope.productDeleteMethod = "DELETE";
 
     $scope.count = 0;
-    $scope.filterProducts = [];
 
     $scope.update = function(categoryId){
-        for (let i = 0; i < $scope.products.length; i++) {
-            if ($scope.products[i].category.id == categoryId) {
-                $scope.filterProducts.push($scope.products[i]);
+        var request = {
+            method: $scope.method,
+            url: ("http://localhost:3029/products/category/"+categoryId),
+            headers: {
+                'Content-Type': "application/json"
             }
-        }
-        $scope.products = $scope.filterProducts;
+        };
+
+        $http(request).then(function(response){
+            if(response.status == 200){
+                $scope.products = response.data;
+            }
+        });
     }
 
     $scope.deleteProduct = function(productId){
