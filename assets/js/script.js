@@ -317,8 +317,16 @@ app.controller('mainPageController', function($scope, $http) {
     $scope.categpryUrl = "http://localhost:3029/categories/";
     $scope.productDeleteMethod = "DELETE";
 
-    $scope.update = function(id){
-        alert(id);
+    $scope.count = 0;
+    $scope.filterProducts = [];
+
+    $scope.update = function(categoryId){
+        for (let i = 0; i < $scope.products.length; i++) {
+            if ($scope.products[i].category.id == categoryId) {
+                $scope.filterProducts.push($scope.products[i]);
+            }
+        }
+        $scope.products = $scope.filterProducts;
     }
 
     $scope.deleteProduct = function(productId){

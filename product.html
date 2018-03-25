@@ -12,7 +12,17 @@
 					</div>
 				</div>
 			</div>
-			<input type="file" onchange="angular.element(this).scope().LoadFileData(this.files)" multiple  /><br/>
+			<div class="file">
+				<label class="file-label">
+					<input class="file-input" type="file" onchange="angular.element(this).scope().LoadFileData(this.files)" multiple>
+					<span class="file-cta">
+						<i class="fas fa-upload"></i>
+					<span class="file-label">
+						Choose images…
+					</span>
+					</span>
+				</label>
+			</div>
 			<button class="button is-success" ng-click="saveProduct()">Save</button>
 		</div>
 		<div class="column is-9 right-side">
